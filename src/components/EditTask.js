@@ -1,13 +1,18 @@
 import { useState, useEffect } from 'react'
-import { useParams, useNavigate } from "react-router-dom";
 import React from 'react';
 import axios from 'axios'
 
+// const editTaskForm = {
+//     title: '',
+//     description: '',
+//     date: Date(),
+// }
 function EditTask(id){
-    const params =  useParams()
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [date, setDate]= useState('')
     const [tasks, setTasks] = useState(null)
     const [editTask, setEditTask] = useState(null)
-    const taskId = params.taskId
 
     useEffect(() => {
         fetchTasks()
@@ -25,26 +30,53 @@ function EditTask(id){
 
     const handleSubmit = (e) => {
         e.preventDefault()
-    axios.put('http://localhost:8000/api/tasks/')
+        const data = {
+            title: title,
+            description: description,
+            date: date
+        }
+    axios.put(`/tasks/${id}/edit`)
     .then((res) => {
         console.log(res.data)
         fetchTasks()
     })
     console.log(editTask)
-    setEditTask((EditTask))
+    setTitle('')
+    setDescription('')
+    setDate('')
 }
-const handleChange = (e) => {
-    const data = { ...editTask, [e.target.name]: e.target.value}
-    setEditTask(data)
-}
-}
-function deleteTask(id){
+ function deleteTask(id){
     axios.delete(`/tasks/${id}`)
     .then((res) => {
         fetchTasks()
     })
-    const data = { ...editTask, [e.target.name]: e.target.value}
-    setEditTask(data)
+    }
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setEditTask(prevTask => ({
+                ...prevTask,
+                [name]: value,
+        }))
+}
+console.log(tasks)
+ return (
+    <>
+    <div>
+        <form onSubmit={handleSubmit}>
+        <label>
+                    Task Title:
+                    <input type="text" name="title" placeholder= "title" onChange={handleChange} value={editTask.title} />
+                    Task Description:
+                    <input type='text' name="description" placeholder= 'description' onChange={handleChange} value={editTask.description}/>
+                    Task Date:
+                    <input type='date' name='date' placeholder= "date" onChange={handleChange} value={Date}/>
+                </label>
+                <input className='delete' name='delete' type='Submit' onChange={handleChange} value={deleteTask.id} />
+        </form>
+    </div>
+    
+    </>
+ )
 }
 
 
