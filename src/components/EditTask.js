@@ -2,17 +2,14 @@ import { useState, useEffect } from 'react'
 import React from 'react';
 import axios from 'axios'
 
-// const editTaskForm = {
-//     title: '',
-//     description: '',
-//     date: Date(),
+// const updates = {
+//     title: "",
+//     description: "",
+//     date: "",
 // }
 function EditTask(id){
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [date, setDate]= useState('')
     const [tasks, setTasks] = useState(null)
-    const [editTask, setEditTask] = useState(null)
+    const [editTask, setEditTask] = useState('')
 
     useEffect(() => {
         fetchTasks()
@@ -29,24 +26,17 @@ function EditTask(id){
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
-        const data = {
-            title: title,
-            description: description,
-            date: date
-        }
-    axios.put(`/tasks/${id}/edit`)
-    .then((res) => {
+        // e.preventDefault()
+        // }
+    axios.put(`http://localhost:8000/api/tasks/${id}`)
+      .then((res) => {
         console.log(res.data)
         fetchTasks()
-    })
+    }, [])}
     console.log(editTask)
-    setTitle('')
-    setDescription('')
-    setDate('')
-}
+
  function deleteTask(id){
-    axios.delete(`/tasks/${id}`)
+    axios.delete(`http://localhost:8000/api/tasks//${id}`)
     .then((res) => {
         fetchTasks()
     })
@@ -71,13 +61,14 @@ console.log(tasks)
                     Task Date:
                     <input type='date' name='date' placeholder= "date" onChange={handleChange} value={Date}/>
                 </label>
-                <input className='delete' name='delete' type='Submit' onChange={handleChange} value={deleteTask.id} />
+                <button className="edit-task" name='edit' onChange={handleChange} value={editTask}>Save</button>
+                <button className="delete-btn" name='delete' onChange={handleChange} value={deleteTask}>Delete</button>
         </form>
     </div>
     
     </>
  )
-}
+ }
 
 
 export default EditTask

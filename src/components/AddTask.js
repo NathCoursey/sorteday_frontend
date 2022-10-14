@@ -3,9 +3,9 @@ import React from 'react';
 import axios from 'axios';
 
 const AddTaskForm = {
-    title: '',
-    description: '',
-    date: Date(),
+    title: "",
+    description: "",
+    date: "",
 }
 function AddTask() {
     const [tasks, setTasks] = useState(null)

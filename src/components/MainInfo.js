@@ -23,15 +23,22 @@ const FeaturedTasks = () => {
   return (
     <div className='App'>
         <h2>All tasks</h2>
+        <div className='add-btn'>
+            <Link to={'/addtask'}>
+                <button type="Submit">Add Task</button>
+            </Link>
+            </div>
       {tasks.map((task) => {
          return (
+            <>
          <div className='tasks-card' key={task.id}>
-            <Link to={`/tasks/${task.id}`}>
+            <Link to={'/tasks/:id/edit'}>
            <h3 className='tasks-title'>{task.title}</h3> 
            </Link>
            <p className='tasks-description'>{task.description}</p>
             <p className='tasks-date'>{task.date}</p>
             </div>
+            </>
          )
          })}
     </div>
