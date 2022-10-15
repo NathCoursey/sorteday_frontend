@@ -1,13 +1,21 @@
 import { useState, useEffect } from 'react'
-// import { useParams } from "react-router-dom"
 import {Link} from 'react-router-dom'
 import React from 'react';
 import axios from 'axios'
+import Todo from './Todo';
 
 const FeaturedTasks = () => {
-// const params = useParams()
-//  const taskId = `${params.taskId}`
   const [tasks, setTasks] = useState([]);
+
+  const onUpdateTask = (task) => {
+    const taskTodoIndex = tasks.findIndex((x) => x.id == task.id);
+    const newTasks = [...tasks];
+
+    const newTask = newTasks[taskTodoIndex];
+    newTask.completed = !newTask.completed;
+    newTasks[taskTodoIndex] = newTask;
+    setTasks(newTasks)
+  }
   useEffect(() => {
     getDisplay()
   }, [])
@@ -20,6 +28,14 @@ const FeaturedTasks = () => {
       console.log(err)
     })
   }
+  const onDelete = (id) => {
+    axios.delete(`http://localhost:8000/api/tasks/${id}/`)
+    .then(() => {
+        getDisplay()
+    }).catch(err => {
+        console.log(err)
+    })
+}
   return (
     <div className='App'>
         <h2>All tasks</h2>
@@ -28,22 +44,14 @@ const FeaturedTasks = () => {
                 <button type="Submit">Add Task</button>
             </Link>
             </div>
-      {tasks.map((task) => {
-         return (
-            <>
-         <div className='tasks-card' key={task.id}>
-            <Link to={'/tasks/:id/edit'}>
-           <h3 className='tasks-title'>{task.title}</h3> 
-           </Link>
-           <p className='tasks-description'>{task.description}</p>
-            <p className='tasks-date'>{task.date}</p>
-            </div>
-            </>
-         )
-         })}
-    </div>
+            <div>
+            <Todo tasks={tasks} onUpdateTask={onUpdateTask} onDelete={onDelete}/>
+      </div>
+      </div>
+                
   )
 }
+
 
 
 export default FeaturedTasks;

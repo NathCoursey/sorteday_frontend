@@ -50,7 +50,7 @@ const handleChange = (e) => {
                     Task Description:
                     <input type='text' name="description" placeholder= 'description' onChange={handleChange} value={taskForm.description}/>
                     Task Date:
-                    <input type='date' name='date' placeholder= "date" onChange={handleChange} value={Date}/>
+                    <input type='date' name='date' placeholder= "date" onChange={handleChange} value={taskForm.date}/>
                 </label>
                 <button type='submit'>Add Task</button>
             </form>

@@ -1,68 +1,49 @@
 import { useState, useEffect } from 'react'
 import React from 'react';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
-// const updates = {
-//     title: "",
-//     description: "",
-//     date: "",
-// }
-function EditTask(id){
-    const [tasks, setTasks] = useState(null)
-    const [editTask, setEditTask] = useState('')
 
-    useEffect(() => {
-        fetchTasks()
-    }, [])
-     
-    function fetchTasks(){
-        axios.get('http://localhost:8000/api/tasks/')
-        .then(res => {
-            console.log(res)
-            setTasks(res.data)
-          }).catch(err => {
-            console.log(err)
-          })
+function EditTask(id) {
+    const navigate = useNavigate()
+const [task, setTask] = useState({
+    title: "",
+    description: "",
+    date: "",
+})
+const handleChange = (e) => {
+    const data = { ...task, [e.target.name]: e.target.value}
+    setTask(data)
     }
 
-    const handleSubmit = (e) => {
-        // e.preventDefault()
-        // }
-    axios.put(`http://localhost:8000/api/tasks/${id}`)
-      .then((res) => {
-        console.log(res.data)
-        fetchTasks()
-    }, [])}
-    console.log(editTask)
+const submitForm = (e) => {
+    e.preventDefault();
+    console.log(e)
+    console.log(task)
 
- function deleteTask(id){
-    axios.delete(`http://localhost:8000/api/tasks//${id}`)
+    axios.put(`http://localhost:8000/api/tasks/${id}/`, task)
     .then((res) => {
-        fetchTasks()
+        console.log(res)
+        console.log(res.data)
     })
-    }
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setEditTask(prevTask => ({
-                ...prevTask,
-                [name]: value,
-        }))
 }
-console.log(tasks)
- return (
+ 
+    
+    return (
     <>
     <div>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={submitForm}>
         <label>
                     Task Title:
-                    <input type="text" name="title" placeholder= "title" onChange={handleChange} value={editTask.title} />
+                    <input type="text" name="title" placeholder= "title" onChange={handleChange} value={task.title} />
                     Task Description:
-                    <input type='text' name="description" placeholder= 'description' onChange={handleChange} value={editTask.description}/>
+                    <input type='text' name="description" placeholder= 'description' onChange={handleChange} value={task.description}/>
                     Task Date:
-                    <input type='date' name='date' placeholder= "date" onChange={handleChange} value={Date}/>
+                    <input type='date' name='date' placeholder= "date" onChange={handleChange} value={task.date}/>
                 </label>
-                <button className="edit-task" name='edit' onChange={handleChange} value={editTask}>Save</button>
-                <button className="delete-btn" name='delete' onChange={handleChange} value={deleteTask}>Delete</button>
+                <button type="submit">Save Changes</button>
+                <button type="reset" value="Reset">Cancel</button>
+                <button className="go-back" name='goback' onClick={() => navigate(-1)}>Go Back</button>
         </form>
     </div>
     
