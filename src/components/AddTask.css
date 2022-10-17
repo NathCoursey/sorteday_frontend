@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Work+Sans:wght@500&display=swap');
+
+.Add-form {
+    background-size: no-repeat;
+}
+
+label {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+}
+
+#inp-title {
+    width: 300px;
+    height:25px;
+    border-radius: 20px;
+    border-width: 0.1px;
+    border-color: #301934;
+    border-style: dotted;
+}
+
+#inp-desc {
+    width: 300px;
+    height:25px;
+    border-radius: 20px;
+    border-width: 0.1px;
+    border-color: #301934;
+    border-style: dotted;
+}
+
+#inp-date {
+    width: 300px;
+    height:25px;
+    border-radius: 20px;
+    border-width: 0.1px;
+    border-color: #301934;
+    border-style: dotted;
+}
+
+h3 {
+    font-size: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    text-align: center;
+}
+
+.add-task-btn {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+
+#add-btn {
+    background-color: #301934;
+    border-radius: 20%;
+    border-style: none;
+    width: 70px;
+    height: 30px;
+    border-radius: 20px;
+    color: white;
+}
+
+#add-btn:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.go-back {
+    margin-left: 200px;
+    border-style: none;
+    background-color: #301934;
+    color: white;
+    width: 95px;
+    height: 30px;
+    border-radius: 20px;
+}
+
+.go-back:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}

@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Work+Sans:wght@500&display=swap');
+.list-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+}
+
+#edit-btn {
+    background-color: rgb(39, 124, 250);
+    border-radius: 20%;
+    border-color: rgb(39, 124, 250);
+    border-style: double;
+    color: white;
+}
+
+#edit-btn:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#delete-btn {
+    background-color: rgb(246, 42, 42);
+    border-radius: 20%;
+    border-color: red;
+    border-style: double;
+    color: white;
+}
+
+#delete-btn:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+#checkbox {
+    width: 20px;
+    height: 20px;
+}
+
+.task-title {
+    font-size: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+li {
+    display: inline-block;
+    }
+
+ul {
+    text-align: center;
+ }
+
+ .tasks-date {
+    font-size: 13px;
+ }

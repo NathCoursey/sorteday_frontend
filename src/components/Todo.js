@@ -1,18 +1,19 @@
 import { FaTrashAlt } from 'react-icons/fa'
 import { AiTwotoneEdit } from 'react-icons/ai'
 import {Link} from 'react-router-dom'
-import EditTask from './EditTask';
+import "./Todo.css"
 
-const Todo = ({ tasks, onUpdateTask, onDelete }) => {
+const Todo = ({ tasks, onUpdateTask, onDelete, EditTask}) => {
     return (
       <ul className="list-group">
         {tasks.map((task) => (
           <li
             key={task.id}
-            className="list-group-item d-flex justify-content-between align-items-center">
-            {task.title}
+            className="list-group-item">
+            <p className="task-title">{task.title}</p>
             <input
               type="checkbox"
+              id="checkbox"
               checked={task.completed}
               onChange={() => onUpdateTask(task)}
             />
@@ -20,10 +21,10 @@ const Todo = ({ tasks, onUpdateTask, onDelete }) => {
             {task.description}
             </p>
             <p className='tasks-date'>{task.date}</p>
-            <Link to={'/tasks/:id'}>
-            <button type="button" onClick={() => EditTask(task.id)}><AiTwotoneEdit/></button>
+            <Link to={`/tasks/${task.id}`}>
+            <button type="button" id="edit-btn" onClick={() => EditTask(task.id)}><AiTwotoneEdit/></button>
             </Link>
-            <button type="button" onClick={() => onDelete(task.id)}><FaTrashAlt /></button>
+            <button type="button" id="delete-btn" onClick={() => onDelete(task.id)}><FaTrashAlt /></button>
           </li>
         ))}
       </ul>

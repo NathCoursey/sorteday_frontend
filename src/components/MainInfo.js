@@ -3,6 +3,9 @@ import {Link} from 'react-router-dom'
 import React from 'react';
 import axios from 'axios'
 import Todo from './Todo';
+import EditTask from './EditTask';
+import {BiPlusMedical} from 'react-icons/bi'
+import "./MainInfo.css"
 
 const FeaturedTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -28,6 +31,7 @@ const FeaturedTasks = () => {
       console.log(err)
     })
   }
+
   const onDelete = (id) => {
     axios.delete(`http://localhost:8000/api/tasks/${id}/`)
     .then(() => {
@@ -38,19 +42,20 @@ const FeaturedTasks = () => {
 }
   return (
     <div className='App'>
-        <h2>All tasks</h2>
-        <div className='add-btn'>
+      <img src="https://i.imgur.com/unK7DjP.png"></img>
+      <div className='add-btn'>
             <Link to={'/addtask'}>
-                <button type="Submit">Add Task</button>
+                <button type="Submit" id="add-plus">Add<BiPlusMedical/></button>
             </Link>
             </div>
+        <h2>To Do:</h2>
             <div>
-            <Todo tasks={tasks} onUpdateTask={onUpdateTask} onDelete={onDelete}/>
+            <Todo tasks={tasks} onUpdateTask={onUpdateTask} onDelete={onDelete} EditTask={EditTask}/>
       </div>
       </div>
-                
-  )
-}
+    )
+  }
+  
 
 
 

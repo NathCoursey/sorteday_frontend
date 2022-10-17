@@ -1,0 +1,17 @@
+.save-btn {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+
+#save-btn {
+    background-color: #301934;
+    border-radius: 20%;
+    border-style: none;
+    width: 70px;
+    height: 30px;
+    border-radius: 20px;
+    color: white;
+}
